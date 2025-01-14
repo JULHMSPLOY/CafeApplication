@@ -2,7 +2,9 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 
 class DessertMenu(BoxLayout):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = 'vertical'
 
 class DessertMenuApp(App):
     def build(self):
