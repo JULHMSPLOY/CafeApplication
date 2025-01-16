@@ -29,6 +29,7 @@ class DessertMenu(BoxLayout):
                          {"Name": "Tiramisu"}, 
                          {"Name": "Macarons"}, 
                          {"Name": "Sugar Rush Donut"}]
+        self.buttons = []
         
 class DessertMenuApp(App):
     def build(self):
