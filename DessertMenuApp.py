@@ -14,18 +14,21 @@ class DessertMenu(BoxLayout):
         self.menu = GridLayout(cols = 1, spacing = 5, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
-        self.desserts = [
-            {"name": "Chocolate Cake"},
-            {"name": "Strawberry Tart"},
-            {"name": "Blueberry Muffin"},
-            {"name": "Ice Cream Sundae"},
-            {"name": "Apple Pie"},
-            {"name": "Lemon Cheesecake"},
-            {"name": "Brownies"},
-            {"name": "Pancakes"},
-            {"name": "Macarons"},
-            {"name": "Cupcakes"},
-        ]
+        self.desserts = [{"Name": "Black Forest"}, 
+                         {"Name": "White Chocolate Cake"}, 
+                         {"Name": "Sour Cream Cheese Cake"}, 
+                         {"Name": "Red Velvet"}, 
+                         {"Name": "New York Cheese Cake"}, 
+                         {"Name": "Macademia White Brownie"}, 
+                         {"Name": "Lemon Cheese Pie"}, 
+                         {"Name": "Green Tea Cake"}, 
+                         {"Name": "Cream Cheese Carrot Cake"},
+                         {"Name": "Banana Cake Cream Cheese"}, 
+                         {"Name" : "Banoffee"}, 
+                         {"Name": "Crepe Cake"}, 
+                         {"Name": "Tiramisu"}, 
+                         {"Name": "Macarons"}, 
+                         {"Name": "Sugar Rush Donut"}]
         
 class DessertMenuApp(App):
     def build(self):
