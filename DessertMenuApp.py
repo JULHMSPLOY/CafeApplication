@@ -30,7 +30,8 @@ class DessertMenu(BoxLayout):
                          {"Name": "Macarons"}, 
                          {"Name": "Sugar Rush Donut"}]
         self.buttons = []
-        
+        for dessert in self.desserts:
+            dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 100)
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
