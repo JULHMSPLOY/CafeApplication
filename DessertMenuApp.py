@@ -38,6 +38,8 @@ class DessertMenu(BoxLayout):
             btn  = Button(text = dessert["Name"], size = (1, 0.2))
             dessert_layout.add_widget(btn)
 
+            self.menu.add_widget(dessert_layout)
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
