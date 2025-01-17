@@ -41,6 +41,8 @@ class DessertMenu(BoxLayout):
             self.menu.add_widget(dessert_layout)
             self.buttons.append((btn, dessert["Name"]))
 
+        self.scroll_view.add_widget(self.menu)
+        
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
