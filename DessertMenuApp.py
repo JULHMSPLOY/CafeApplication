@@ -3,6 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.button import Button
 
 class DessertMenu(BoxLayout):
     def __init__(self, **kwargs):
@@ -29,9 +30,14 @@ class DessertMenu(BoxLayout):
                          {"Name": "Tiramisu"}, 
                          {"Name": "Macarons"}, 
                          {"Name": "Sugar Rush Donut"}]
+        
         self.buttons = []
         for dessert in self.desserts:
             dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 100)
+
+            btn  = Button(text = dessert["Name"], size = (1, 0.2))
+            dessert_layout.add_widget(btn)
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
