@@ -39,6 +39,7 @@ class DessertMenu(BoxLayout):
             dessert_layout.add_widget(btn)
 
             self.menu.add_widget(dessert_layout)
+            self.buttons.append((btn, dessert["Name"]))
 
 class DessertMenuApp(App):
     def build(self):
