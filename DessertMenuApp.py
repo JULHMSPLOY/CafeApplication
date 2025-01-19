@@ -50,6 +50,9 @@ class DessertMenu(BoxLayout):
             self.cart.append(dessert_name)
             self.update_cart_label()
 
+    def update_cart_label(self):
+        self.crat_label.text = f"Cart: {len(self.cart)} items"
+        
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
