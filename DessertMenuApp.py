@@ -44,6 +44,9 @@ class DessertMenu(BoxLayout):
         self.scroll_view.add_widget(self.menu)
         self.add_widget(self.scroll_view)
 
+    def add_to_cart(self, instance):
+        dessert_name = instance.text   
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
