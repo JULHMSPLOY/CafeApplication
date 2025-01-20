@@ -44,6 +44,8 @@ class DessertMenu(BoxLayout):
         self.scroll_view.add_widget(self.menu)
         self.add_widget(self.scroll_view)
 
+        self.cart = []
+        
     def add_to_cart(self, instance):
         dessert_name = instance.text
         if dessert_name and dessert_name not in self.cart:
@@ -52,7 +54,7 @@ class DessertMenu(BoxLayout):
 
     def update_cart_label(self):
         self.crat_label.text = f"Cart: {len(self.cart)} items"
-        
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
