@@ -36,6 +36,7 @@ class DessertMenu(BoxLayout):
             dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 100)
 
             btn  = Button(text = dessert["Name"], size = (1, 0.2))
+            btn.bind(on_press = self.add_to_cart)
             dessert_layout.add_widget(btn)
 
             self.menu.add_widget(dessert_layout)
