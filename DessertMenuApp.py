@@ -48,6 +48,8 @@ class DessertMenu(BoxLayout):
         self.cart_label = Label(text = "Cart: 0 items", size_hint = (1, 0.1))
         self.add_widget(self.cart_label)
 
+        self.checkout_button = Button(text = "Checkout", size_hint = (1, 0.1))
+
         self.cart = []
         
     def add_to_cart(self, instance):
