@@ -50,6 +50,7 @@ class DessertMenu(BoxLayout):
 
         self.checkout_button = Button(text = "Checkout", size_hint = (1, 0.1))
         self.checkout_button.bind(on_press = self.checkout)
+        self.add_widget(self.checkout_button)
 
         self.cart = []
         
