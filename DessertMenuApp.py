@@ -44,6 +44,9 @@ class DessertMenu(BoxLayout):
         self.scroll_view.add_widget(self.menu)
         self.add_widget(self.scroll_view)
 
+        self.cart_label = Label(text = "Cart: 0 items", size_hint = (1, 0.1))
+        self.add_widget(self.cart_label)
+
         self.cart = []
         
     def add_to_cart(self, instance):
