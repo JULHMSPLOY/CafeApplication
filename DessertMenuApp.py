@@ -5,20 +5,21 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
+from kivy.uix.image import Image
 
 class DessertMenu(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.orientation = 'vertical'
 
-        self.add_widget(Label(text = 'Menu', font_size = 40, size_hint = (1, 0.1)))
+        self.add_widget(Label(text = 'Menu', font_size = 30, size_hint = (1, 0.1)))
 
         self.search_bar = TextInput(hint_text = "Search...", font_size = 30, size = (1, 0.1))
         self.search_bar.bind(text = self.search_desserts)
         self.add_widget(self.search_bar)
 
-        self.scroll_view = ScrollView(size_hint = (1, 0.5))
-        self.menu = GridLayout(cols = 1, spacing = 5, size_hint_y = None)
+        self.scroll_view = ScrollView(size_hint = (1, 0.7))
+        self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
         self.desserts = [{"Name": "Black Forest"}, 
@@ -40,6 +41,9 @@ class DessertMenu(BoxLayout):
         self.buttons = []
         for dessert in self.desserts:
             dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 100)
+
+            img = Image(source = dessert["image"], size_hint = (1, 0.8))
+            dessert_layout.add_widget(img)
 
             btn  = Button(text = dessert["Name"], size = (1, 0.2))
             btn.bind(on_press = self.add_to_cart)
