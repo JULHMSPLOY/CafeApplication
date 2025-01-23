@@ -63,6 +63,10 @@ class DessertMenu(BoxLayout):
         self.add_widget(self.reset_button)
 
         self.cart = []
+
+    def search_desserts(self, instance, value):
+        for btn, dessert_name in self.buttons:
+            btn.parent.opacity = 1 if value.lower() in dessert_name.lower() else 0
         
     def add_to_cart(self, instance):
         dessert_name = instance.text
