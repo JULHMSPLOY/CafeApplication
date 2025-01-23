@@ -63,6 +63,9 @@ class DessertMenu(BoxLayout):
     def update_cart_label(self):
         self.crat_label.text = f"Cart: {len(self.cart)} items"
 
+    def checkout(self, instance):
+        print("Checking out the following items: ")
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
