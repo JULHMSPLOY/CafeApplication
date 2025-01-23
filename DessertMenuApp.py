@@ -15,6 +15,7 @@ class DessertMenu(BoxLayout):
 
         self.search_bar = TextInput(hint_text = "Search...", font_size = 30, size = (1, 0.1))
         self.search_bar.bind(text = self.search_desserts)
+        self.add_widget(self.search_bar)
 
         self.scroll_view = ScrollView(size_hint = (1, 0.5))
         self.menu = GridLayout(cols = 1, spacing = 5, size_hint_y = None)
