@@ -74,6 +74,10 @@ class DessertMenu(BoxLayout):
         self.cart = []
         self.update_cart_label()
 
+    def reset_cart(self, instance):
+        self.cart = []
+        self.update_cart_label()
+
 class DessertMenuApp(App):
     def build(self):
         return DessertMenu()
