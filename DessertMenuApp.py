@@ -65,6 +65,8 @@ class DessertMenu(BoxLayout):
 
     def checkout(self, instance):
         print("Checking out the following items: ")
+        for item in self.cart:
+            print(f"- {item}")
 
 class DessertMenuApp(App):
     def build(self):
