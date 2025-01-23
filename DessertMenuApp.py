@@ -54,7 +54,8 @@ class DessertMenu(BoxLayout):
 
         self.reset_button = Button(text = "Reset Cart", size_hint = (1, 0.1))
         self.reset_button.bind(on_press = self.reset_cart)
-        
+        self.add_widget(self.reset_button)
+
         self.cart = []
         
     def add_to_cart(self, instance):
