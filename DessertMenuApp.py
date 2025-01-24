@@ -22,21 +22,21 @@ class DessertMenu(BoxLayout):
         self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
-        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": 65}, 
-                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": 65}, 
-                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": 70}, 
-                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": 65}, 
-                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": 70}, 
-                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": 80}, 
-                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": 75}, 
-                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg"}, 
-                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": 55},
-                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": 65}, 
-                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": 65}, 
-                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": 65}, 
-                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": 80}, 
-                         {"Name": "Macarons", "image": "macarons.jpg", "Price": 40}, 
-                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": 35}]
+        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": "65 Bath"}, 
+                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": "65 Bath"}, 
+                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": "70 Bath"}, 
+                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": "65 Bath"}, 
+                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": "70 Bath"}, 
+                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": "80 Bath"}, 
+                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": "75 Bath"}, 
+                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg", "Price": "75 Bath"}, 
+                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": "55 Bath"},
+                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": "65 Bath"}, 
+                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": "65 Bath"}, 
+                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": "65 Bath"}, 
+                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": "80 Bath"}, 
+                         {"Name": "Macarons", "image": "macarons.jpg", "Price": "40 Bath"}, 
+                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": "35 Bath"}]
         
         self.buttons = []
         for dessert in self.desserts:
@@ -45,7 +45,7 @@ class DessertMenu(BoxLayout):
             img = Image(source = dessert["image"], size_hint = (1, 3))
             dessert_layout.add_widget(img)
 
-            btn  = Button(text = f"{dessert["Name"]}\n฿{[dessert["Price"]]}", size = (1, 0.2))
+            btn  = Button(text = f"{dessert['Name']}\n{dessert['Price']}", size = (1, 0.2))
             btn.bind(on_press = self.add_to_cart)
             dessert_layout.add_widget(btn)
 
