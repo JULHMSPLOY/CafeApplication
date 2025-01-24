@@ -45,12 +45,12 @@ class DessertMenu(BoxLayout):
             img = Image(source = dessert["image"], size_hint = (1, 3))
             dessert_layout.add_widget(img)
 
-            btn  = Button(text = f"{dessert["Name"]}\n฿{[dessert['Price']]}", size = (1, 0.2))
+            btn  = Button(text = f"{dessert["Name"]}\n฿{[dessert["Price"]]}", size = (1, 0.2))
             btn.bind(on_press = self.add_to_cart)
             dessert_layout.add_widget(btn)
 
             self.menu.add_widget(dessert_layout)
-            self.buttons.append((btn, dessert["Name"]))
+            self.buttons.append((btn, dessert["Name"], dessert["Price"]))
 
         self.scroll_view.add_widget(self.menu)
         self.add_widget(self.scroll_view)
