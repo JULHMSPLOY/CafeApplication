@@ -45,7 +45,7 @@ class DessertMenu(BoxLayout):
             img = Image(source = dessert["image"], size_hint = (1, 3))
             dessert_layout.add_widget(img)
 
-            btn  = Button(text = dessert["Name"], size = (1, 0.2))
+            btn  = Button(text = f"{dessert["Name"]}\n฿{[dessert['Price']]}", size = (1, 0.2))
             btn.bind(on_press = self.add_to_cart)
             dessert_layout.add_widget(btn)
 
