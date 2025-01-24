@@ -74,7 +74,7 @@ class DessertMenu(BoxLayout):
         
     def add_to_cart(self, instance):
         dessert_name = instance.text
-        if dessert_name and dessert_name not in self.cart:
+        if dessert_name:
             self.cart.append(dessert_name)
             self.update_cart_label()
 
