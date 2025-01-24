@@ -14,7 +14,7 @@ class DessertMenu(BoxLayout):
 
         self.add_widget(Label(text = 'Menu', font_size = 30, size_hint = (1, 0.1)))
 
-        self.search_bar = TextInput(hint_text = "Search...", font_size = 30, size = (1, 0.1))
+        self.search_bar = TextInput(hint_text = "Search...", font_size = 30, size_hint = (1, 0.1))
         self.search_bar.bind(text = self.search_desserts)
         self.add_widget(self.search_bar)
 
@@ -22,27 +22,27 @@ class DessertMenu(BoxLayout):
         self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
-        self.desserts = [{"Name": "Black Forest"}, 
-                         {"Name": "White Chocolate Cake"}, 
-                         {"Name": "Sour Cream Cheese Cake"}, 
-                         {"Name": "Red Velvet"}, 
-                         {"Name": "New York Cheese Cake"}, 
-                         {"Name": "Macademia White Brownie"}, 
-                         {"Name": "Lemon Cheese Pie"}, 
-                         {"Name": "Green Tea Cake"}, 
-                         {"Name": "Cream Cheese Carrot Cake"},
-                         {"Name": "Banana Cake Cream Cheese"}, 
-                         {"Name" : "Banoffee"}, 
-                         {"Name": "Crepe Cake"}, 
-                         {"Name": "Tiramisu"}, 
-                         {"Name": "Macarons"}, 
-                         {"Name": "Sugar Rush Donut"}]
+        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg"}, 
+                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg"}, 
+                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg"}, 
+                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg"}, 
+                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg"}, 
+                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg"}, 
+                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg"}, 
+                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg"}, 
+                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg"},
+                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg"}, 
+                         {"Name" : "Banoffee", "image": "banoffee.jpg"}, 
+                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg"}, 
+                         {"Name": "Tiramisu", "image":"tiramisu.jpg"}, 
+                         {"Name": "Macarons", "image": "macarons.jpg"}, 
+                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg"}]
         
         self.buttons = []
         for dessert in self.desserts:
-            dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 100)
+            dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 200)
 
-            img = Image(source = dessert["image"], size_hint = (1, 0.8))
+            img = Image(source = dessert["image"], size_hint = (1, 3))
             dessert_layout.add_widget(img)
 
             btn  = Button(text = dessert["Name"], size = (1, 0.2))
