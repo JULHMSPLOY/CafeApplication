@@ -43,19 +43,19 @@ class DessertMenu(BoxLayout):
         self.cart = []
         
         for dessert in self.desserts:
-            dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 200)
+            dessert_layout = BoxLayout(orientation = 'vertical', size_hint_y = None, height = 250)
 
             img = Image(source = dessert["image"], size_hint = (1, 3))
             dessert_layout.add_widget(img)
 
-            btn  = Button(text = f"{dessert['Name']}\n{dessert['Price']}", size = (1, 0.2))
+            btn  = Button(text = f"{dessert['Name']}\n{dessert['Price']}", size = (2, 2))
             btn.bind(on_press = self.add_to_cart)
             dessert_layout.add_widget(btn)
 
             count_spinner = Spinner(
-                text='1', values=[str(i) for i in range(1, 11)], size_hint=(1, None), height=30
+                text='1', values=[str(i) for i in range(1, 11)], size_hint = (1, None), height = 35
             )
-            count_spinner.bind(text=lambda spinner, value, dessert_name=dessert["Name"]: self.set_quantity(dessert_name, int(value)))
+            count_spinner.bind(text = lambda spinner, value, dessert_name = dessert["Name"]: self.set_quantity(dessert_name, int(value)))
             dessert_layout.add_widget(count_spinner)
 
             self.menu.add_widget(dessert_layout)
@@ -77,6 +77,10 @@ class DessertMenu(BoxLayout):
         self.reset_button = Button(text = "Reset Cart", size_hint = (1, 0.1))
         self.reset_button.bind(on_press = self.reset_cart)
         self.add_widget(self.reset_button)
+
+        self.confirm_button = Button(text="Confirm Order", size_hint=(1, 0.1))
+        self.confirm_button.bind(on_press=self.confirm_order)
+        self.add_widget(self.confirm_button)
 
     def search_desserts(self, instance, value):
         for btn, dessert_name, _ in self.buttons:
@@ -124,6 +128,9 @@ class DessertMenu(BoxLayout):
         self.cart = []
         self.update_cart_label()
         self.calculate_total_price()
+
+    def confirm_order(self, instance):
+        print("Order confirmed!")
 
 class DessertMenuApp(App):
     def build(self):
