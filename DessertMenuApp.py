@@ -27,21 +27,21 @@ class DessertMenu(BoxLayout):
         self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
-        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": "65.00 Bath"}, 
-                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": "65.00 Bath"}, 
-                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": "70.00 Bath"}, 
-                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": "65.00 Bath"}, 
-                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": "70.00 Bath"}, 
-                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": "80.00 Bath"}, 
-                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": "75.00 Bath"}, 
-                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg", "Price": "75.00 Bath"}, 
-                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": "55.00 Bath"},
-                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": "65.00 Bath"}, 
-                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": "65.00 Bath"}, 
-                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": "65.00 Bath"}, 
-                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": "80.00 Bath"}, 
-                         {"Name": "Macarons", "image": "macarons.jpg", "Price": "40.00 Bath"}, 
-                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": "35.00 Bath"}]
+        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": "65.00 Bath", "stock": 5}, 
+                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": "65.00 Bath", "stock": 4}, 
+                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": "70.00 Bath", "stock": 0}, 
+                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": "65.00 Bath", "stock": 6}, 
+                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": "70.00 Bath", "stock": 1}, 
+                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": "80.00 Bath", "stock": 0}, 
+                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": "75.00 Bath", "stock": 3}, 
+                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg", "Price": "75.00 Bath", "stock": 0}, 
+                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": "55.00 Bath", "stock": 2},
+                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": "65.00 Bath", "stock": 4}, 
+                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": "65.00 Bath", "stock": 3}, 
+                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": "65.00 Bath", "stock": 7}, 
+                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": "80.00 Bath", "stock": 5}, 
+                         {"Name": "Macarons", "image": "macarons.jpg", "Price": "40.00 Bath", "stock": 15}, 
+                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": "35.00 Bath", "stock": 10}]
         
         self.buttons = []
         self.cart = []
@@ -54,6 +54,8 @@ class DessertMenu(BoxLayout):
 
             btn  = Button(text = f"{dessert['Name']}\n{dessert['Price']}", size = (2, 2))
             btn.bind(on_press = self.add_to_cart)
+            if dessert["stock"] == 0:
+                btn.disabled = True
             dessert_layout.add_widget(btn)
 
             count_spinner = Spinner(
@@ -104,6 +106,9 @@ class DessertMenu(BoxLayout):
     def add_to_cart(self, instance):
         for btn, dessert_name, dessert_price, count_spinner in self.buttons:
             if instance == btn:
+                if btn.disabled:  
+                    self.show_out_of_stock_message(dessert_name)
+                    return
                 price = float(dessert_price.split()[0])
                 quantity = int(count_spinner.text)
                 self.cart.append({"Name": dessert_name, "Price": price, "Quantity": quantity})
@@ -161,6 +166,10 @@ class DessertMenu(BoxLayout):
 
     def confirm_order(self, instance):
         print("Order confirmed!")
+
+    def show_out_of_stock_message(self, dessert_name):
+        popup = Popup(title="Out of Stock", content=Label(text=f"Sorry, {dessert_name} is out of stock!"), size_hint=(0.5, 0.5))
+        popup.open()
 
 class DessertMenuApp(App):
     def build(self):
