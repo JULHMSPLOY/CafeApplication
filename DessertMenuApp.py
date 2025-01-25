@@ -20,6 +20,9 @@ class DessertMenu(BoxLayout):
         self.search_bar.bind(text = self.search_desserts)
         self.add_widget(self.search_bar)
 
+        self.recommendation_label = Label(text="Popular Desserts", font_size=20, size_hint=(1, 0.1))
+        self.add_widget(self.recommendation_label)
+
         self.scroll_view = ScrollView(size_hint = (1, 0.7))
         self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
@@ -86,6 +89,13 @@ class DessertMenu(BoxLayout):
         self.confirm_button = Button(text="Confirm Order", size_hint=(1, 0.1))
         self.confirm_button.bind(on_press=self.confirm_order)
         self.add_widget(self.confirm_button)
+
+        self.update_recommendations()
+
+    def update_recommendations(self):
+        popular_desserts = ["New York Cheese Cake", "Tiramisu", "Green Tea Cake"]
+        recommended_text = "Popular Desserts: " + ", ".join(popular_desserts)
+        self.recommendation_label.text = recommended_text
 
     def search_desserts(self, instance, value):
         for btn, dessert_name, _ in self.buttons:
