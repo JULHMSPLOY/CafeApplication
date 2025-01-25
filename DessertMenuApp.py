@@ -7,6 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
+from kivy.uix.popup import Popup
 
 class DessertMenu(BoxLayout):
     def __init__(self, **kwargs):
@@ -78,6 +79,10 @@ class DessertMenu(BoxLayout):
         self.reset_button.bind(on_press = self.reset_cart)
         self.add_widget(self.reset_button)
 
+        self.view_cart_botton = Button(text = "View Cart", size_hint = (1, 0.1))
+        self.view_cart_botton.bind(on_press = self.view_cart)
+        self.add_widget(self.view_cart_botton)
+
         self.confirm_button = Button(text="Confirm Order", size_hint=(1, 0.1))
         self.confirm_button.bind(on_press=self.confirm_order)
         self.add_widget(self.confirm_button)
@@ -95,6 +100,7 @@ class DessertMenu(BoxLayout):
                 self.update_cart_label()
                 self.calculate_total_price()
                 break
+
     def set_quantity(self, dessert_name, quantity):
         for item in self.cart:
             if item["Name"] == dessert_name:
@@ -128,6 +134,20 @@ class DessertMenu(BoxLayout):
         self.cart = []
         self.update_cart_label()
         self.calculate_total_price()
+
+    def view_cart(self, instance):
+        content = BoxLayout(orientation='vertical', spacing=10, padding=10)
+        for item in self.cart:
+            content.add_widget(Label(
+                text=f"{item['Name']} x {item['Quantity']} - {item['Price'] * item['Quantity']:.2f} Bath"
+            ))
+        total_price = sum(item["Price"] * item["Quantity"] for item in self.cart)
+        content.add_widget(Label(text=f"Total: {total_price:.2f} Bath", bold=True))
+        close_button = Button(text="Close", size_hint=(1, 0.2))
+        content.add_widget(close_button)
+        popup = Popup(title="Cart Items", content=content, size_hint=(0.8, 0.8))
+        close_button.bind(on_press=popup.dismiss)
+        popup.open()
 
     def confirm_order(self, instance):
         print("Order confirmed!")
