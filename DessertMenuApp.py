@@ -22,21 +22,21 @@ class DessertMenu(BoxLayout):
         self.menu = GridLayout(cols = 2, spacing = 10, size_hint_y = None)
         self.menu.bind(minimum_height = self.menu.setter('height'))
 
-        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": "65 Bath"}, 
-                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": "65 Bath"}, 
-                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": "70 Bath"}, 
-                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": "65 Bath"}, 
-                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": "70 Bath"}, 
-                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": "80 Bath"}, 
-                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": "75 Bath"}, 
-                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg", "Price": "75 Bath"}, 
-                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": "55 Bath"},
-                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": "65 Bath"}, 
-                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": "65 Bath"}, 
-                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": "65 Bath"}, 
-                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": "80 Bath"}, 
-                         {"Name": "Macarons", "image": "macarons.jpg", "Price": "40 Bath"}, 
-                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": "35 Bath"}]
+        self.desserts = [{"Name": "Black Forest", "image": "black_forest.jpg", "Price": "65.00 Bath"}, 
+                         {"Name": "White Chocolate Cake", "image": "white_chocolate_cake.jpg", "Price": "65.00 Bath"}, 
+                         {"Name": "Sour Cream Cheese Cake", "image": "sour_cream_cheese_cake.jpg", "Price": "70.00 Bath"}, 
+                         {"Name": "Red Velvet", "image":"red_velvet_cake.jpg", "Price": "65.00 Bath"}, 
+                         {"Name": "New York Cheese Cake", "image": "new_york_cheese_cake.jpg", "Price": "70.00 Bath"}, 
+                         {"Name": "Macademia White Brownie", "image": "macademia_white_brownie.jpeg", "Price": "80.00 Bath"}, 
+                         {"Name": "Lemon Cheese Pie", "image": "lemon_cheese_pie.jpg", "Price": "75.00 Bath"}, 
+                         {"Name": "Green Tea Cake", "image": "green_tea_cake.jpg", "Price": "75.00 Bath"}, 
+                         {"Name": "Cream Cheese Carrot Cake", "image":"cream_cheese_carrot_cake.jpg", "Price": "55.00 Bath"},
+                         {"Name": "Banana Cake Cream Cheese", "image": "banana_cake_cream_cheese.jpg", "Price": "65.00 Bath"}, 
+                         {"Name" : "Banoffee", "image": "banoffee.jpg", "Price": "65.00 Bath"}, 
+                         {"Name": "Crepe Cake", "image": "crepe_cake.jpg", "Price": "65.00 Bath"}, 
+                         {"Name": "Tiramisu", "image":"tiramisu.jpg", "Price": "80.00 Bath"}, 
+                         {"Name": "Macarons", "image": "macarons.jpg", "Price": "40.00 Bath"}, 
+                         {"Name": "Sugar Rush Donut", "image": "sugar_rush_donut.jpg", "Price": "35.00 Bath"}]
         
         self.buttons = []
         for dessert in self.desserts:
@@ -72,28 +72,39 @@ class DessertMenu(BoxLayout):
         self.cart = []
 
     def search_desserts(self, instance, value):
-        for btn, dessert_name in self.buttons:
+        for btn, dessert_name, _ in self.buttons:
             btn.parent.opacity = 1 if value.lower() in dessert_name.lower() else 0
         
     def add_to_cart(self, instance):
-        dessert_name = instance.text
-        if dessert_name:
-            self.cart.append(dessert_name)
-            self.update_cart_label()
+        for btn, dessert_name, dessert_price in self.buttons:
+            if instance == btn:
+                price = float(dessert_price.split()[0])
+                self.cart.append({"Name": dessert_name, "Price": price})
+                self.update_cart_label()
+                self.calculate_total_price()
+                break
 
     def update_cart_label(self):
         self.cart_label.text = f"Cart: {len(self.cart)} items"
 
+    def calculate_total_price(self):
+        total_price = sum(float(item["Price"]) for item in self.cart)
+        self.total_label.text = f"Total: {total_price:.2f} Bath"
+
     def checkout(self, instance):
         print("Checking out the following items: ")
         for item in self.cart:
-            print(f"- {item}")
+            print(f"- {item['Name']} - {item['Price']} Bath")
+        total_price = sum(item["Price"] for item in self.cart)
+        print(f"Total amount: {total_price:.2f} Bath")
         self.cart = []
         self.update_cart_label()
+        self.calculate_total_price()
 
     def reset_cart(self, instance):
         self.cart = []
         self.update_cart_label()
+        self.calculate_total_price()
 
 class DessertMenuApp(App):
     def build(self):
